@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.100.190:1883",clientId);
+        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://test.mosquitto.org:1883",clientId);
         //client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.43.41:1883",clientId);
 
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Toast.makeText(MainActivity.this,"connected!!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Broker Connected!",Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(MainActivity.this,DashboardActivity.class);
                     startActivity(intent);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Toast.makeText(MainActivity.this,"connection failed!!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Broker Connection Failed!",Toast.LENGTH_LONG).show();
                 }
             });
         } catch (MqttException e) {

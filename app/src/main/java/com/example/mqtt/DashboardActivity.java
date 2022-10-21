@@ -17,7 +17,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    SwitchMaterial closetOne, closetTwo, closetThree, closetFour;
+    SwitchMaterial closetOne, closetTwo, closetThree, closetFour, closetMaster;
     MqttAndroidClient client;
 
     @Override
@@ -29,7 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
         String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.100.190:1883",clientId);
+        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://test.mosquitto.org:1883",clientId);
 
         initialize();
 
@@ -38,6 +38,7 @@ public class DashboardActivity extends AppCompatActivity {
         closetTwo = findViewById(R.id.switchCloset2);
         closetThree = findViewById(R.id.switchCloset3);
         closetFour = findViewById(R.id.switchCloset4);
+        closetMaster = findViewById(R.id.switchClosetMaster);
 
         //for Closet One
 
@@ -115,6 +116,24 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        //
+
+        closetMaster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(closetMaster.isChecked()){
+                    String topic = "ALLCLOSETS";
+                    String message = "OPEN";
+                    try {
+                        client.publish(topic, message.getBytes(),0,false);
+                        Toast.makeText(DashboardActivity.this,"All Closets Opened!",Toast.LENGTH_SHORT).show();
+                    } catch ( MqttException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
     }
 
 
@@ -124,13 +143,13 @@ public class DashboardActivity extends AppCompatActivity {
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Toast.makeText(DashboardActivity.this,"connected!!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(DashboardActivity.this,"Broker Connected!",Toast.LENGTH_LONG).show();
 
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Toast.makeText(DashboardActivity.this,"connection failed!!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(DashboardActivity.this,"Broker Connection Failed!",Toast.LENGTH_LONG).show();
                 }
             });
         } catch (MqttException e) {
