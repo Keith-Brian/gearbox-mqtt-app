@@ -25,11 +25,8 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-
-
-
         String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://test.mosquitto.org:1883",clientId);
+        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.0.212:1883",clientId);
 
         initialize();
 
@@ -46,8 +43,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(closetOne.isChecked()){
-                    String topic = "CLOSET1";
-                    String message = "OPEN";
+                    String topic = "Lock";
+                    String message = "1";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
                         Toast.makeText(DashboardActivity.this,"Closet 1 Opened",Toast.LENGTH_SHORT).show();
@@ -65,8 +62,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(closetOne.isChecked()){
-                    String topic = "CLOSET2";
-                    String message = "OPEN";
+                    String topic = "Lock";
+                    String message = "2";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
                         Toast.makeText(DashboardActivity.this,"Closet 2 Opened",Toast.LENGTH_SHORT).show();
@@ -84,8 +81,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(closetOne.isChecked()){
-                    String topic = "CLOSET3";
-                    String message = "OPEN";
+                    String topic = "Lock";
+                    String message = "3";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
                         Toast.makeText(DashboardActivity.this,"Closet 3 Opened",Toast.LENGTH_SHORT).show();
@@ -103,8 +100,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(closetOne.isChecked()){
-                    String topic = "CLOSET4";
-                    String message = "OPEN";
+                    String topic = "Lock";
+                    String message = "4";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
                         Toast.makeText(DashboardActivity.this,"Closet 4 Opened",Toast.LENGTH_SHORT).show();
@@ -122,8 +119,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(closetMaster.isChecked()){
-                    String topic = "ALLCLOSETS";
-                    String message = "OPEN";
+                    String topic = "Lock";
+                    String message = "5";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
                         Toast.makeText(DashboardActivity.this,"All Closets Opened!",Toast.LENGTH_SHORT).show();

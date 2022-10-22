@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     MqttAndroidClient client;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://test.mosquitto.org:1883",clientId);
+        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.0.212:1883",clientId);
         //client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.43.41:1883",clientId);
 
 
