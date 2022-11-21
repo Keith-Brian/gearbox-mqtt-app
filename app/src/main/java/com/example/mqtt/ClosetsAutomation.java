@@ -15,7 +15,7 @@ import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
-public class DashboardActivity extends AppCompatActivity {
+public class ClosetsAutomation extends AppCompatActivity {
 
     SwitchMaterial closetOne, closetTwo, closetThree, closetFour, closetMaster;
     MqttAndroidClient client;
@@ -26,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.0.212:1883",clientId);
+        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://test.mosquitto.org:1883",clientId);
 
         initialize();
 
@@ -35,7 +35,6 @@ public class DashboardActivity extends AppCompatActivity {
         closetTwo = findViewById(R.id.switchCloset2);
         closetThree = findViewById(R.id.switchCloset3);
         closetFour = findViewById(R.id.switchCloset4);
-        closetMaster = findViewById(R.id.switchClosetMaster);
 
         //for Closet One
 
@@ -47,7 +46,7 @@ public class DashboardActivity extends AppCompatActivity {
                     String message = "1";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
-                        Toast.makeText(DashboardActivity.this,"Closet 1 Opened",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClosetsAutomation.this,"Closet 1 Opened",Toast.LENGTH_SHORT).show();
                     } catch ( MqttException e) {
                         e.printStackTrace();
                     }
@@ -66,7 +65,7 @@ public class DashboardActivity extends AppCompatActivity {
                     String message = "2";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
-                        Toast.makeText(DashboardActivity.this,"Closet 2 Opened",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClosetsAutomation.this,"Closet 2 Opened",Toast.LENGTH_SHORT).show();
                     } catch ( MqttException e) {
                         e.printStackTrace();
                     }
@@ -85,7 +84,7 @@ public class DashboardActivity extends AppCompatActivity {
                     String message = "3";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
-                        Toast.makeText(DashboardActivity.this,"Closet 3 Opened",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClosetsAutomation.this,"Closet 3 Opened",Toast.LENGTH_SHORT).show();
                     } catch ( MqttException e) {
                         e.printStackTrace();
                     }
@@ -104,7 +103,7 @@ public class DashboardActivity extends AppCompatActivity {
                     String message = "4";
                     try {
                         client.publish(topic, message.getBytes(),0,false);
-                        Toast.makeText(DashboardActivity.this,"Closet 4 Opened",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClosetsAutomation.this,"Closet 4 Opened",Toast.LENGTH_SHORT).show();
                     } catch ( MqttException e) {
                         e.printStackTrace();
                     }
@@ -115,21 +114,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         //
 
-        closetMaster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(closetMaster.isChecked()){
-                    String topic = "Lock";
-                    String message = "5";
-                    try {
-                        client.publish(topic, message.getBytes(),0,false);
-                        Toast.makeText(DashboardActivity.this,"All Closets Opened!",Toast.LENGTH_SHORT).show();
-                    } catch ( MqttException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+
 
     }
 
@@ -140,13 +125,13 @@ public class DashboardActivity extends AppCompatActivity {
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Toast.makeText(DashboardActivity.this,"Broker Connected!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClosetsAutomation.this,"Broker Connected!",Toast.LENGTH_LONG).show();
 
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Toast.makeText(DashboardActivity.this,"Broker Connection Failed!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClosetsAutomation.this,"Broker Connection Failed!",Toast.LENGTH_LONG).show();
                 }
             });
         } catch (MqttException e) {
@@ -161,15 +146,15 @@ public class DashboardActivity extends AppCompatActivity {
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Toast.makeText(DashboardActivity.this,"Broker Disconnected!",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+                    Toast.makeText(ClosetsAutomation.this,"Broker Disconnected!",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ClosetsAutomation.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Toast.makeText(DashboardActivity.this,"Failed to Disconnect!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClosetsAutomation.this,"Failed to Disconnect!",Toast.LENGTH_LONG).show();
                 }
             });
         } catch (MqttException e) {

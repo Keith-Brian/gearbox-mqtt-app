@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="#f3f3f3"
     android:layout_height="match_parent"
-    tools:context=".DashboardActivity">
+    tools:context=".ClosetsAutomation">
 
     <LinearLayout
         android:id="@+id/topNavBar"
@@ -18,21 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
+            android:fontFamily="@font/futura_bold"
             android:gravity="center"
-            android:text="@string/gearbox_storage_control"
+            android:text="STORAGE ACCESSS"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="25sp"/>
 
-        <ImageView
-            android:id="@+id/disconnectBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="60dp"
-            android:onClick="disconnect"
-            android:src="@drawable/ic_baseline_stop_circle_24"
-            android:contentDescription="@string/none" />
     </LinearLayout>
 
 
@@ -73,6 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/storage_one"
+                    android:fontFamily="@font/futura_medium"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="10dp"
@@ -120,6 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/storage_two"
+                    android:fontFamily="@font/futura_medium"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="10dp"
@@ -166,6 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/storage_three"
+                    android:fontFamily="@font/futura_medium"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="10dp"
@@ -213,6 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/storage_four"
+                    android:fontFamily="@font/futura_medium"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="10dp"
@@ -245,29 +241,15 @@
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/master_control"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switchClosetMaster"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:scaleX="2"
-            android:scaleY="2" />
-
-
-
-
 
     </LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu"
+        android:layout_alignParentBottom="true"/>
 
 
 

@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".splashScreenActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gearbox_storage_access_caps"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"/>
-
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -26,24 +17,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:layout_alignParentBottom="true">
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/powered_by"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/gearbox_logo"
-            android:contentDescription="@string/logo"/>
+            android:contentDescription="@string/logo"
+            android:src="@drawable/gearbox_logo" />
     </LinearLayout>
 
 

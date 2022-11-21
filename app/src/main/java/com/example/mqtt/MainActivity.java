@@ -3,14 +3,9 @@ package com.example.mqtt;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -32,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         String clientId = MqttClient.generateClientId();
-        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.0.212:1883",clientId);
+        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://test.mosquitto.org:1883",clientId);
         //client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.43.41:1883",clientId);
 
 
@@ -65,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Toast.makeText(MainActivity.this,"Broker Connected!",Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(MainActivity.this,DashboardActivity.class);
+                    Intent intent = new Intent(MainActivity.this, ClosetsAutomation.class);
                     startActivity(intent);
                     finish();
 
