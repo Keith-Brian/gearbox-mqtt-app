@@ -11,6 +11,7 @@
         android:id="@+id/topNavBar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:elevation="1000dp"
         android:background="@drawable/head_navbar">
 
         <TextView
@@ -24,6 +25,21 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="25sp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/img_logout"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                app:backgroundTint="@color/black"
+                style="@style/Widget.AppCompat.ImageButton"
+                android:background="@drawable/ic_baseline_exit"/>
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -247,6 +263,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
+        android:id="@+id/bottomNavBarDashboard"
         android:layout_height="wrap_content"
         app:menu="@menu/menu"
         android:layout_alignParentBottom="true"/>

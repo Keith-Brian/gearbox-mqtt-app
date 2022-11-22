@@ -1,13 +1,18 @@
 package com.example.mqtt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -18,6 +23,9 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 public class ClosetsAutomation extends AppCompatActivity {
 
     SwitchMaterial closetOne, closetTwo, closetThree, closetFour, closetMaster;
+    BottomNavigationView navClosets;
+    Button logOut;
+    FirebaseAuth mAuth;
     MqttAndroidClient client;
 
     @Override
@@ -35,6 +43,60 @@ public class ClosetsAutomation extends AppCompatActivity {
         closetTwo = findViewById(R.id.switchCloset2);
         closetThree = findViewById(R.id.switchCloset3);
         closetFour = findViewById(R.id.switchCloset4);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        logOut = findViewById(R.id.img_logout);
+
+
+        navClosets = findViewById(R.id.bottomNavBarDashboard);
+
+
+        navClosets.setSelectedItemId(R.id.Closets);
+
+        navClosets.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+
+                    case R.id.Closets:
+                        startActivity(new Intent(getApplicationContext(),ClosetsAutomation.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.Lights:
+                        startActivity(new Intent(getApplicationContext(),LightAutomation.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+
+                    case R.id.Door:
+                        startActivity(new Intent(getApplicationContext(),DoorAutomation.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+
+                }
+
+                return false;
+
+            }
+        });
+
+
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Toast.makeText(ClosetsAutomation.this, "User Logged Out!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 
         //for Closet One
 
@@ -79,7 +141,7 @@ public class ClosetsAutomation extends AppCompatActivity {
         closetThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(closetOne.isChecked()){
+                if(closetThree.isChecked()){
                     String topic = "Lock";
                     String message = "3";
                     try {
@@ -98,7 +160,7 @@ public class ClosetsAutomation extends AppCompatActivity {
         closetFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(closetOne.isChecked()){
+                if(closetFour.isChecked()){
                     String topic = "Lock";
                     String message = "4";
                     try {
@@ -125,7 +187,7 @@ public class ClosetsAutomation extends AppCompatActivity {
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Toast.makeText(ClosetsAutomation.this,"Broker Connected!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClosetsAutomation.this,"Closets",Toast.LENGTH_LONG).show();
 
                 }
 
